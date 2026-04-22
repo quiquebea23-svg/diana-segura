@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diana Segura · Fotógrafa de Bodas & Familia · Barcelona</title>
+  <meta name="description" content="Diana Segura, fotógrafa especializada en bodas y familias en Barcelona. Fotos naturales y emotivas. 4,8★ Google · contacto@dianasegura.com · 609 110 224"/>
+  <meta property="og:title" content="Diana Segura · Fotógrafa de Bodas & Familia · Barcelona"/>
+  <meta property="og:description" content="Fotógrafa especializada en bodas y familias en Barcelona. Fotos naturales, sin posados artificiales."/>
+  <meta property="og:url" content="https://dianasegura.com/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:locale" content="es_ES"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor">
+    <div class="cursor-ring" id="cursorRing"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-text" id="cursorText">VER</div>
+  </div>
+
+  <!-- LOADER -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">DS</div>
+      <div class="loader-bar"><div class="loader-progress" id="loaderProgress"></div></div>
+      <div class="loader-pct" id="loaderPct">0%</div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">
+      <span class="nl-mono">DS</span>
+      <span class="nl-name">Diana Segura</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#sobre-mi" class="nl">Sobre mí</a></li>
+      <li><a href="#servicios" class="nl">Servicios</a></li>
+      <li><a href="#portfolio" class="nl">Portfolio</a></li>
+      <li><a href="#resenas" class="nl">Reseñas</a></li>
+      <li><a href="#contacto" class="nl-cta">Reservar</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Menú">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mob-menu" id="mobMenu">
+    <div class="mob-menu-inner">
+      <ul>
+        <li><a href="#sobre-mi" class="mm-link" data-num="01">Sobre mí</a></li>
+        <li><a href="#servicios" class="mm-link" data-num="02">Servicios</a></li>
+        <li><a href="#portfolio" class="mm-link" data-num="03">Portfolio</a></li>
+        <li><a href="#resenas" class="mm-link" data-num="04">Reseñas</a></li>
+        <li><a href="#contacto" class="mm-link" data-num="05">Reservar</a></li>
+      </ul>
+      <div class="mob-menu-foot">
+        <a href="mailto:contacto@dianasegura.com">contacto@dianasegura.com</a>
+        <a href="https://www.instagram.com/dianasegurafotografia/" target="_blank" rel="noopener">@dianasegurafotografia</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg">
+      <div class="hero-gradient"></div>
+      <div class="hero-noise"></div>
+      <!-- Placeholder para vídeo/imagen principal -->
+      <div class="hero-media">
+        <div class="hero-media-placeholder">
+          <div class="hmp-icon">◎</div>
+          <p>Imagen / Vídeo hero</p>
+          <small>Reemplaza con tu foto o vídeo de fondo</small>
+        </div>
+      </div>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="he-dot"></span>
+        Barcelona · Disponible 2025/2026
+      </div>
+      <h1 class="hero-title">
+        <span class="ht-l1" data-reveal>Fotografía</span>
+        <span class="ht-l2" data-reveal><em>que sientes</em></span>
+        <span class="ht-l3" data-reveal>antes de verla</span>
+      </h1>
+      <p class="hero-sub" data-reveal>Capturo emociones reales · Barcelona & toda España</p>
+      <div class="hero-actions" data-reveal>
+        <a href="#portfolio" class="ha-primary">Ver portfolio</a>
+        <a href="#contacto" class="ha-secondary">
+          <span class="ha-arrow">↓</span>
+          Reservar sesión
+        </a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hs-item">
+        <span class="hs-num" data-count="4.8" data-dec>4,8</span>
+        <span class="hs-stars">★★★★★</span>
+        <span class="hs-lbl">Google</span>
+      </div>
+      <div class="hs-sep"></div>
+      <div class="hs-item">
+        <span class="hs-num" data-count="19">19</span>
+        <span class="hs-lbl">Reseñas</span>
+      </div>
+      <div class="hs-sep"></div>
+      <div class="hs-item">
+        <span class="hs-num">5+</span>
+        <span class="hs-lbl">Años</span>
+      </div>
+      <div class="hs-sep"></div>
+      <div class="hs-item">
+        <span class="hs-num">BCN</span>
+        <span class="hs-lbl">Barcelona</span>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="hsh-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>Bodas</span><b>✦</b>
+      <span>Familias</span><b>✦</b>
+      <span>Retratos</span><b>✦</b>
+      <span>Prebodas</span><b>✦</b>
+      <span>Barcelona</span><b>✦</b>
+      <span>Amor</span><b>✦</b>
+      <span>Bodas</span><b>✦</b>
+      <span>Familias</span><b>✦</b>
+      <span>Retratos</span><b>✦</b>
+      <span>Prebodas</span><b>✦</b>
+      <span>Barcelona</span><b>✦</b>
+      <span>Amor</span><b>✦</b>
+    </div>
+  </div>
+
+  <!-- SOBRE MÍ -->
+  <section class="about section" id="sobre-mi">
+    <div class="about-visual">
+      <div class="av-frame">
+        <div class="av-img av-img--main img-placeholder" data-hover-cursor>
+          <div class="ip-inner"><div class="ip-icon">◎</div><span>Foto de Diana</span></div>
+        </div>
+        <div class="av-img av-img--sm img-placeholder" data-hover-cursor>
+          <div class="ip-inner sm"><div class="ip-icon">◎</div></div>
+        </div>
+        <div class="av-pill">
+          <div class="av-pill-num">+5</div>
+          <div class="av-pill-txt">años</div>
+        </div>
+        <div class="av-circle"></div>
+      </div>
+    </div>
+    <div class="about-copy">
+      <span class="eyebrow" data-reveal>Sobre mí</span>
+      <h2 class="sec-h2" data-reveal>Hola,<br/>soy <em>Diana</em></h2>
+      <div class="about-hr" data-reveal></div>
+      <p class="body-copy" data-reveal>Fotógrafa con estudio en el corazón de Barcelona. Me especializo en bodas, familias y retratos con una filosofía muy clara: las mejores fotos son las que se viven, no las que se fuerzan.</p>
+      <p class="body-copy" data-reveal>Cuando me contratas, te olvidas de que hay una cámara. El resultado: fotos naturales, luminosas y llenas de emoción auténtica que contarán tu historia para siempre.</p>
+      <div class="about-tags" data-reveal>
+        <span>📍 c/Llibertat, 22 · Barcelona</span>
+        <span>🌍 Toda España</span>
+        <span>🐾 Mascotas bienvenidas</span>
+        <span>💌 contacto@dianasegura.com</span>
+      </div>
+      <a href="https://www.instagram.com/dianasegurafotografia/" target="_blank" rel="noopener" class="about-ig" data-reveal>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        @dianasegurafotografia
+        <svg class="ext-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="services section" id="servicios">
+    <div class="services-head">
+      <span class="eyebrow" data-reveal>Servicios</span>
+      <h2 class="sec-h2" data-reveal>¿Qué estás<br/><em>buscando?</em></h2>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card" data-reveal>
+        <div class="svc-num">01</div>
+        <div class="svc-top">
+          <div class="svc-ico">💍</div>
+          <h3 class="svc-title">Bodas</h3>
+        </div>
+        <p class="svc-desc">Desde los preparativos hasta la última canción. Cobertura completa de tu día más especial, con fotos naturales que contarán vuestra historia para siempre.</p>
+        <ul class="svc-list">
+          <li>Sesión completa del día</li>
+          <li>Edición personalizada</li>
+          <li>Galería online privada</li>
+          <li>Entrega en 4–6 semanas</li>
+        </ul>
+        <a href="#contacto" class="svc-btn">Consultar →</a>
+      </div>
+      <div class="svc-card" data-reveal>
+        <div class="svc-num">02</div>
+        <div class="svc-top">
+          <div class="svc-ico">👨‍👩‍👧</div>
+          <h3 class="svc-title">Familias</h3>
+        </div>
+        <p class="svc-desc">Sesiones en estudio o exteriores en Barcelona. Relajadas, divertidas y con más fotos de las que esperas. Mascotas totalmente bienvenidas.</p>
+        <ul class="svc-list">
+          <li>Estudio o exterior</li>
+          <li>Mascotas welcome</li>
+          <li>Entrega en 7 días</li>
+          <li>Galería online privada</li>
+        </ul>
+        <a href="#contacto" class="svc-btn">Consultar →</a>
+      </div>
+      <div class="svc-card" data-reveal>
+        <div class="svc-num">03</div>
+        <div class="svc-top">
+          <div class="svc-ico">🌸</div>
+          <h3 class="svc-title">Retratos</h3>
+        </div>
+        <p class="svc-desc">Para profesionales, marcas personales o simplemente para tenerte tú. Sesiones en los rincones más bonitos de Barcelona o en estudio.</p>
+        <ul class="svc-list">
+          <li>Branding personal</li>
+          <li>Localizaciones BCN</li>
+          <li>Uso comercial incluido</li>
+          <li>Entrega en 7 días</li>
+        </ul>
+        <a href="#contacto" class="svc-btn">Consultar →</a>
+      </div>
+      <div class="svc-card" data-reveal>
+        <div class="svc-num">04</div>
+        <div class="svc-top">
+          <div class="svc-ico">💕</div>
+          <h3 class="svc-title">Prebodas & Amor</h3>
+        </div>
+        <p class="svc-desc">Sesiones de pareja para conectar con la cámara antes de la boda, o simplemente para celebrar el amor en cualquier momento del año.</p>
+        <ul class="svc-list">
+          <li>Sesión 1–2 horas</li>
+          <li>Localizaciones especiales</li>
+          <li>Perfecta antes de la boda</li>
+          <li>Entrega en 7 días</li>
+        </ul>
+        <a href="#contacto" class="svc-btn">Consultar →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio section" id="portfolio">
+    <div class="pf-head">
+      <span class="eyebrow" data-reveal>Portfolio</span>
+      <h2 class="sec-h2" data-reveal>Momentos<br/><em>capturados</em></h2>
+      <div class="pf-filters" data-reveal>
+        <button class="pf-filter active" data-filter="all">Todos</button>
+        <button class="pf-filter" data-filter="boda">Bodas</button>
+        <button class="pf-filter" data-filter="familia">Familias</button>
+        <button class="pf-filter" data-filter="retrato">Retratos</button>
+        <button class="pf-filter" data-filter="amor">Amor</button>
+      </div>
+    </div>
+    <div class="pf-grid" id="pfGrid">
+      <!-- Las fotos se añaden aquí — reemplaza los placeholders con tus imágenes reales -->
+      <!-- Para añadir foto real: <img src="images/foto.jpg" alt="descripción" data-cat="boda"> -->
+      <div class="pf-item" data-cat="boda" data-reveal>
+        <div class="pf-img img-placeholder" data-hover-cursor>
+          <div class="ip-inner"><span>Boda</span></div>
+          <div class="pf-hover">
+            <span class="pf-hover-cat">Boda</span>
+            <span class="pf-hover-action">+ Ver</span>
+          </div>
+        </div>
+      </div>
+      <div class="pf-item pf-item--tall" data-cat="retrato" data-reveal>
+        <div class="pf-img img-placeholder" data-hover-cursor>
+          <div class="ip-inner"><span>Retrato</span></div>
+          <div class="pf-hover">
+            <span class="pf-hover-cat">Retrato</span>
+            <span class="pf-hover-action">+ Ver</span>
+          </div>
+        </div>
+      </div>
+      <div class="pf-item" data-cat="familia" data-reveal>
+        <div class="pf-img img-placeholder" data-hover-cursor>
+          <div class="ip-inner"><span>Familia</span></div>
+          <div class="pf-hover">
+            <span class="pf-hover-cat">Familia</span>
+            <span class="pf-hover-action">+ Ver</span>
+          </div>
+        </div>
+      </div>
+      <div class="pf-item pf-item--wide" data-cat="boda" data-reveal>
+        <div class="pf-img img-placeholder" data-hover-cursor>
+          <div class="ip-inner"><span>Boda · Barcelona</span></div>
+          <div class="pf-hover">
+            <span class="pf-hover-cat">Boda</span>
+            <span class="pf-hover-action">+ Ver</span>
+          </div>
+        </div>
+      </div>
+      <div class="pf-item" data-cat="amor" data-reveal>
+        <div class="pf-img img-placeholder" data-hover-cursor>
+          <div class="ip-inner"><span>Amor</span></div>
+          <div class="pf-hover">
+            <span class="pf-hover-cat">Amor</span>
+            <span class="pf-hover-action">+ Ver</span>
+          </div>
+        </div>
+      </div>
+      <div class="pf-item pf-item--tall" data-cat="familia" data-reveal>
+        <div class="pf-img img-placeholder" data-hover-cursor>
+          <div class="ip-inner"><span>Familia</span></div>
+          <div class="pf-hover">
+            <span class="pf-hover-cat">Familia</span>
+            <span class="pf-hover-action">+ Ver</span>
+          </div>
+        </div>
+      </div>
+      <div class="pf-item" data-cat="retrato" data-reveal>
+        <div class="pf-img img-placeholder" data-hover-cursor>
+          <div class="ip-inner"><span>Retrato</span></div>
+          <div class="pf-hover">
+            <span class="pf-hover-cat">Retrato</span>
+            <span class="pf-hover-action">+ Ver</span>
+          </div>
+        </div>
+      </div>
+      <div class="pf-item" data-cat="boda" data-reveal>
+        <div class="pf-img img-placeholder" data-hover-cursor>
+          <div class="ip-inner"><span>Boda</span></div>
+          <div class="pf-hover">
+            <span class="pf-hover-cat">Boda</span>
+            <span class="pf-hover-action">+ Ver</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pf-cta-wrap" data-reveal>
+      <a href="https://www.instagram.com/dianasegurafotografia/" target="_blank" rel="noopener" class="pf-cta">
+        Ver más en Instagram
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section class="process section">
+    <div class="proc-head">
+      <span class="eyebrow" data-reveal>Cómo funciona</span>
+      <h2 class="sec-h2" data-reveal>Así de <em>fácil</em></h2>
+    </div>
+    <div class="proc-steps">
+      <div class="proc-step" data-reveal>
+        <div class="ps-num">01</div>
+        <div class="ps-ico">💬</div>
+        <h3 class="ps-title">Me escribes</h3>
+        <p class="ps-desc">Cuéntame tu idea. Hablamos sin compromiso por mensaje o llamada.</p>
+      </div>
+      <div class="proc-line" data-reveal></div>
+      <div class="proc-step" data-reveal>
+        <div class="ps-num">02</div>
+        <div class="ps-ico">📅</div>
+        <h3 class="ps-title">Reservamos</h3>
+        <p class="ps-desc">Elegimos día, hora y localización perfecta en Barcelona o donde necesites.</p>
+      </div>
+      <div class="proc-line" data-reveal></div>
+      <div class="proc-step" data-reveal>
+        <div class="ps-num">03</div>
+        <div class="ps-ico">📸</div>
+        <h3 class="ps-title">Disfrutamos</h3>
+        <p class="ps-desc">El día de la sesión, solo tienes que ser tú. Yo me encargo de todo lo demás.</p>
+      </div>
+      <div class="proc-line" data-reveal></div>
+      <div class="proc-step" data-reveal>
+        <div class="ps-num">04</div>
+        <div class="ps-ico">🌸</div>
+        <h3 class="ps-title">Recibes tus fotos</h3>
+        <p class="ps-desc">En 7 días tu galería privada online. Editadas, perfectas y tuyas para siempre.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEÑAS -->
+  <section class="reviews section" id="resenas">
+    <div class="rev-head">
+      <span class="eyebrow" data-reveal>Reseñas</span>
+      <h2 class="sec-h2" data-reveal>Lo que dicen<br/><em>ellos</em></h2>
+    </div>
+    <div class="rev-rating" data-reveal>
+      <div class="rr-num">4,8</div>
+      <div class="rr-right">
+        <div class="rr-stars">★★★★★</div>
+        <div class="rr-meta">19 reseñas verificadas · Google</div>
+      </div>
+      <div class="rr-g">G</div>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-card" data-reveal>
+        <div class="rc-quote">"</div>
+        <p class="rc-text">Escogimos a Diana para nuestra boda y no podemos estar más contentos. Queríamos fotos naturales, sin posados artificiales. Diana supo captar esos momentos a la perfección. Repetiríamos sin dudarlo.</p>
+        <div class="rc-foot">
+          <div class="rc-av" style="--av-bg: linear-gradient(135deg,#fda4af,#f43f5e)">C</div>
+          <div>
+            <div class="rc-name">Cliente · Boda</div>
+            <div class="rc-stars">★★★★★ <span>· hace 1 año</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="rev-card rev-card--feat" data-reveal>
+        <div class="rc-quote">"</div>
+        <p class="rc-text">Hicimos una sesión familiar en su estudio con dos perritos. Diana fue muy maja y atenta. Las fotos nos encantan, y más cantidad de las que esperábamos. La recomiendo al 100%. ¡Gracias Diana!</p>
+        <div class="rc-foot">
+          <div class="rc-av" style="--av-bg: linear-gradient(135deg,#fbcfe8,#ec4899)">F</div>
+          <div>
+            <div class="rc-name">Sesión familiar</div>
+            <div class="rc-stars">★★★★★ <span>· hace 1 año</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="rev-card" data-reveal>
+        <div class="rc-quote">"</div>
+        <p class="rc-text">Nos casamos en pandemia con mil complicaciones. Solo dos proveedores no pusieron ni una pega. Diana fue uno de ellos. Profesionalidad y humanidad totales en un momento muy difícil.</p>
+        <div class="rc-foot">
+          <div class="rc-av" style="--av-bg: linear-gradient(135deg,#fecdd3,#fb7185)">B</div>
+          <div>
+            <div class="rc-name">Boda especial</div>
+            <div class="rc-stars">★★★★★ <span>· hace 3 años</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq section">
+    <div class="faq-head">
+      <span class="eyebrow" data-reveal>FAQ</span>
+      <h2 class="sec-h2" data-reveal>Preguntas<br/><em>frecuentes</em></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item" data-reveal>
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Con cuánta antelación hay que reservar?
+          <div class="faq-icon"><span></span><span></span></div>
+        </button>
+        <div class="faq-a">Para bodas, lo ideal es reservar con 6–12 meses de antelación para asegurar la fecha. Para sesiones de familia o retrato, con 2–4 semanas suele ser suficiente.</div>
+      </div>
+      <div class="faq-item" data-reveal>
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Trabajas fuera de Barcelona?
+          <div class="faq-icon"><span></span><span></span></div>
+        </button>
+        <div class="faq-a">Sí, trabajo por toda España y también acepto proyectos internacionales. Los desplazamientos se valoran según la localización. Cuéntame tu idea y buscamos la manera.</div>
+      </div>
+      <div class="faq-item" data-reveal>
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Cuánto tiempo tardas en entregar las fotos?
+          <div class="faq-icon"><span></span><span></span></div>
+        </button>
+        <div class="faq-a">Para sesiones cortas (familia, retrato), en 7 días. Para bodas, entre 4 y 6 semanas. Recibirás una galería privada online con todas las fotos editadas en alta resolución.</div>
+      </div>
+      <div class="faq-item" data-reveal>
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Puedo traer a mi mascota?
+          <div class="faq-icon"><span></span><span></span></div>
+        </button>
+        <div class="faq-a">¡Claro que sí! Las mascotas son bienvenidas en todas las sesiones. De hecho, dan vida y naturalidad a las fotos. Cuantos más mejor.</div>
+      </div>
+      <div class="faq-item" data-reveal>
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Cómo funciona el proceso de reserva?
+          <div class="faq-icon"><span></span><span></span></div>
+        </button>
+        <div class="faq-a">Muy sencillo: contáctame, hablamos de tu sesión ideal, te envío presupuesto personalizado y confirmamos con un depósito. Sin letra pequeña ni sorpresas.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contact section" id="contacto">
+    <div class="ct-left">
+      <span class="eyebrow" data-reveal>Contacto</span>
+      <h2 class="ct-h2" data-reveal>¿Lista para<br/><em>empezar?</em></h2>
+      <p class="body-copy" data-reveal>Respondo en menos de 24 horas. Cuéntame tu historia.</p>
+      <div class="ct-info" data-reveal>
+        <a href="mailto:contacto@dianasegura.com" class="ct-info-item">
+          <div class="cti-ico">📧</div>
+          <div><div class="cti-lbl">Email</div><div class="cti-val">contacto@dianasegura.com</div></div>
+        </a>
+        <a href="https://wa.me/34609110224?text=Hola%20Diana%2C%20he%20estado%20mirando%20tu%20web%20y%20me%20gustar%C3%ADa%20m%C3%A1s%20info%20sobre%20tus%20servicios%20%3A)" target="_blank" rel="noopener" class="ct-info-item">
+          <div class="cti-ico">📱</div>
+          <div><div class="cti-lbl">WhatsApp</div><div class="cti-val">609 110 224</div></div>
+        </a>
+        <a href="https://maps.app.goo.gl/MbhcUXWLYpRRCt6D9" target="_blank" rel="noopener" class="ct-info-item">
+          <div class="cti-ico">📍</div>
+          <div><div class="cti-lbl">Estudio</div><div class="cti-val">c/Llibertat, 22 · Barcelona</div></div>
+        </a>
+        <a href="https://www.instagram.com/dianasegurafotografia/" target="_blank" rel="noopener" class="ct-info-item">
+          <div class="cti-ico">📸</div>
+          <div><div class="cti-lbl">Instagram</div><div class="cti-val">@dianasegurafotografia</div></div>
+        </a>
+      </div>
+    </div>
+    <form class="ct-form" id="ctForm" onsubmit="handleSubmit(event)" data-reveal>
+      <div class="cf-row">
+        <div class="cf-g">
+          <label>Nombre *</label>
+          <input type="text" name="nombre" placeholder="Tu nombre" required/>
+        </div>
+        <div class="cf-g">
+          <label>Email *</label>
+          <input type="email" name="email" placeholder="hola@email.com" required/>
+        </div>
+      </div>
+      <div class="cf-row">
+        <div class="cf-g">
+          <label>Teléfono</label>
+          <input type="tel" name="telefono" placeholder="+34 600 000 000"/>
+        </div>
+        <div class="cf-g">
+          <label>Tipo de sesión</label>
+          <select name="servicio">
+            <option value="">Seleccionar...</option>
+            <option>Boda</option>
+            <option>Familia</option>
+            <option>Retrato</option>
+            <option>Preboda / Pareja</option>
+            <option>Otro</option>
+          </select>
+        </div>
+      </div>
+      <div class="cf-g">
+        <label>Fecha aproximada</label>
+        <input type="text" name="fecha" placeholder="Ej: Junio 2025, sin fecha fija..."/>
+      </div>
+      <div class="cf-g">
+        <label>Cuéntame *</label>
+        <textarea name="mensaje" rows="4" placeholder="¿Qué imaginas? ¿Dónde? ¿Qué historia quieres contar?..." required></textarea>
+      </div>
+      <button type="submit" class="cf-submit" id="cfSubmit">
+        <span id="cfBtnTxt">Enviar mensaje</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      </button>
+      <div class="cf-success" id="cfSuccess">
+        ✓ ¡Mensaje enviado! Te respondo en menos de 24h 🌸
+      </div>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="ft-logo">Diana Segura</div>
+        <div class="ft-tagline">Fotógrafa · Barcelona</div>
+      </div>
+      <nav class="ft-nav">
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#resenas">Reseñas</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="ft-social">
+        <a href="https://www.instagram.com/dianasegurafotografia/" target="_blank" rel="noopener" class="ft-soc-btn">Instagram</a>
+        <a href="https://wa.me/34609110224" target="_blank" rel="noopener" class="ft-soc-btn">WhatsApp</a>
+        <a href="https://dianasegura.com" target="_blank" rel="noopener" class="ft-soc-btn">Web</a>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2025 Diana Segura Fotografía · c/Llibertat, 22, Barcelona</span>
+      <span>
+        <a href="mailto:contacto@dianasegura.com">contacto@dianasegura.com</a>
+        · <a href="tel:+34609110224">609 110 224</a>
+      </span>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+    <button class="lb-prev" onclick="lbPrev(event)">‹</button>
+    <button class="lb-next" onclick="lbNext(event)">›</button>
+    <div class="lb-content" id="lbContent">
+      <div class="lb-placeholder">
+        <div class="ip-icon" style="font-size:4rem">◎</div>
+        <p style="color:rgba(255,255,255,0.4);margin-top:1rem">Cuando añadas fotos reales, se abrirán aquí en grande</p>
+      </div>
+    </div>
+    <div class="lb-caption" id="lbCaption"></div>
+  </div>
+
+  <!-- WHATSAPP FLOAT -->
+  <a class="wa-float" href="https://wa.me/34609110224?text=Hola%20Diana%2C%20he%20estado%20mirando%20tu%20web%20y%20me%20gustar%C3%ADa%20m%C3%A1s%20info%20sobre%20tus%20servicios%20%3A)" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+    <svg viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+    <span class="wa-tip">¡Hola! ¿Puedo ayudarte?</span>
+  </a>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
