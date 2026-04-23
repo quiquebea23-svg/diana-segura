@@ -334,3 +334,144 @@
   });
 
 })();
+
+/* ============================================
+   V5 NUEVAS FEATURES
+   ============================================ */
+
+/* ========== DARK MODE TOGGLE ========== */
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+const savedTheme = localStorage.getItem('ds-theme') || 'light-mode';
+body.classList.remove('light-mode','dark-mode');
+body.classList.add(savedTheme);
+if(themeToggle){
+  themeToggle.addEventListener('click', ()=>{
+    const isDark = body.classList.contains('dark-mode');
+    body.classList.toggle('dark-mode', !isDark);
+    body.classList.toggle('light-mode', isDark);
+    localStorage.setItem('ds-theme', isDark ? 'light-mode' : 'dark-mode');
+  });
+}
+
+/* ========== PÉTALOS ANIMADOS ========== */
+(function(){
+  const canvas = document.getElementById('petalsCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const PETAL_COUNT = 22;
+  const petals = [];
+  // Colores rosas suaves
+  const colors = ['rgba(216,112,147,0.55)','rgba(244,194,213,0.5)','rgba(252,230,240,0.6)','rgba(200,84,120,0.4)','rgba(255,182,207,0.5)'];
+
+  function createPetal(fromTop=false){
+    return {
+      x: Math.random()*W,
+      y: fromTop ? -20 : Math.random()*H,
+      r: Math.random()*10 + 5,
+      rot: Math.random()*Math.PI*2,
+      rotSpeed: (Math.random()-0.5)*0.06,
+      vx: (Math.random()-0.5)*0.8,
+      vy: Math.random()*1.2 + 0.4,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      wobble: Math.random()*Math.PI*2,
+      wobbleSpeed: Math.random()*0.04 + 0.01,
+    };
+  }
+  for(let i=0;i<PETAL_COUNT;i++) petals.push(createPetal(false));
+
+  function drawPetal(p){
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, p.r, p.r*0.55, 0, 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  let paused = false;
+  document.addEventListener('visibilitychange', ()=>{ paused = document.hidden; });
+
+  function animate(){
+    requestAnimationFrame(animate);
+    if(paused) return;
+    ctx.clearRect(0,0,W,H);
+    petals.forEach(p=>{
+      p.wobble += p.wobbleSpeed;
+      p.x += p.vx + Math.sin(p.wobble)*0.5;
+      p.y += p.vy;
+      p.rot += p.rotSpeed;
+      if(p.y > H + 20) Object.assign(p, createPetal(true));
+      drawPetal(p);
+    });
+  }
+  animate();
+})();
+
+/* ========== HERO VIDEO BACKGROUND ========== */
+const heroBgVideo = document.getElementById('heroBgVideo');
+if(heroBgVideo){
+  heroBgVideo.addEventListener('error', ()=>{
+    // Si el vídeo no carga, fallback limpio
+    heroBgVideo.style.display = 'none';
+  });
+}
+
+/* ========== PARALLAX PORTFOLIO ========== */
+(function(){
+  const items = document.querySelectorAll('.pf-item');
+  function onScroll(){
+    const scrollY = window.pageYOffset;
+    items.forEach((item, i)=>{
+      const rect = item.getBoundingClientRect();
+      const centerOffset = (rect.top + rect.height/2) - window.innerHeight/2;
+      const depth = (i%3 === 0) ? 0.06 : (i%3 === 1) ? 0.03 : 0.09;
+      const img = item.querySelector('img');
+      if(img){
+        const ty = centerOffset * depth;
+        img.style.transform = `scale(1.12) translateY(${ty}px)`;
+      }
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+/* ========== BEFORE / AFTER SLIDER ========== */
+(function(){
+  function initBA(handleId, beforeId){
+    const handle = document.getElementById(handleId);
+    const before = document.getElementById(beforeId);
+    if(!handle || !before) return;
+    const wrap = before.closest('.ba-slider-wrap');
+    let dragging = false;
+
+    function setPos(clientX){
+      const rect = wrap.getBoundingClientRect();
+      let pct = (clientX - rect.left) / rect.width * 100;
+      pct = Math.max(2, Math.min(98, pct));
+      handle.style.left = pct + '%';
+      before.style.clipPath = `inset(0 ${100-pct}% 0 0)`;
+    }
+
+    handle.addEventListener('mousedown', e=>{ dragging=true; e.preventDefault(); });
+    window.addEventListener('mouseup', ()=>dragging=false);
+    window.addEventListener('mousemove', e=>{ if(dragging) setPos(e.clientX); });
+
+    handle.addEventListener('touchstart', e=>{ dragging=true; e.preventDefault(); },{passive:false});
+    window.addEventListener('touchend', ()=>dragging=false);
+    window.addEventListener('touchmove', e=>{ if(dragging) setPos(e.touches[0].clientX); },{passive:true});
+
+    // Also allow clicking anywhere on wrap
+    wrap.addEventListener('click', e=>setPos(e.clientX));
+  }
+  initBA('baHandle1','baBefore1');
+  initBA('baHandle2','baBefore2');
+})();
