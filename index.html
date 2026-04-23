@@ -15,7 +15,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css"/>
 </head>
-<body>
+<body class="light-mode">
+
+  <!-- PÉTALOS CANVAS -->
+  <canvas id="petalsCanvas" aria-hidden="true"></canvas>
 
   <!-- LOADER -->
   <div class="loader" id="loader">
@@ -40,6 +43,10 @@
       <li><a href="#resenas" class="nl">Reseñas</a></li>
       <li><a href="#contacto" class="nl-cta">Reservar</a></li>
     </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <span class="tt-sun">☀️</span>
+      <span class="tt-moon">🌙</span>
+    </button>
     <button class="burger" id="burger" aria-label="Menú">
       <span></span><span></span>
     </button>
@@ -68,7 +75,12 @@
     <div class="hero-bg">
       <div class="hero-gradient"></div>
       <div class="hero-media">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80" alt="Boda fotografía Diana Segura"/>
+        <!-- Vídeo de fondo tipo cine. Reemplaza src con tu propio vídeo -->
+        <video id="heroBgVideo" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80">
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-dancing-and-laughing-at-their-wedding-40120-large.mp4" type="video/mp4"/>
+          <!-- Fallback imagen si el vídeo no carga -->
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80" alt="Boda fotografía Diana Segura"/>
+        </video>
       </div>
       <div class="hero-overlay"></div>
     </div>
@@ -586,7 +598,144 @@
     </a>
   </section>
 
-  <!-- FAQ -->
+  <!-- ANTES / DESPUÉS -->
+  <section class="beforeafter section" id="edicion">
+    <div class="ba-head">
+      <span class="eyebrow" data-reveal>Edición</span>
+      <h2 class="sec-h2" data-reveal>La magia de<br/><em>editar bien</em></h2>
+      <p class="ba-sub" data-reveal>Arrastra el slider para ver la diferencia entre la foto original y la versión editada.</p>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-item" data-reveal>
+        <div class="ba-slider-wrap">
+          <div class="ba-after">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=900&q=85&sat=20&blend=FCEEF4&blend-mode=multiply" alt="Foto editada"/>
+          </div>
+          <div class="ba-before" id="baBefore1">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=900&q=85&grayscale" alt="Foto original"/>
+          </div>
+          <div class="ba-handle" id="baHandle1">
+            <div class="ba-handle-line"></div>
+            <div class="ba-handle-btn">
+              <span>◀</span><span>▶</span>
+            </div>
+          </div>
+          <div class="ba-labels">
+            <span class="ba-lbl ba-lbl--before">Antes</span>
+            <span class="ba-lbl ba-lbl--after">Después</span>
+          </div>
+        </div>
+      </div>
+      <div class="ba-item" data-reveal>
+        <div class="ba-slider-wrap">
+          <div class="ba-after">
+            <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=900&q=85" alt="Foto editada"/>
+          </div>
+          <div class="ba-before" id="baBefore2">
+            <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=900&q=85&grayscale" alt="Foto original"/>
+          </div>
+          <div class="ba-handle" id="baHandle2">
+            <div class="ba-handle-line"></div>
+            <div class="ba-handle-btn">
+              <span>◀</span><span>▶</span>
+            </div>
+          </div>
+          <div class="ba-labels">
+            <span class="ba-lbl ba-lbl--before">Antes</span>
+            <span class="ba-lbl ba-lbl--after">Después</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM FEED -->
+  <section class="igfeed section" id="instagram">
+    <div class="ig-head">
+      <span class="eyebrow" data-reveal>Instagram</span>
+      <h2 class="sec-h2" data-reveal>Síguenos en<br/><em>@dianasegurafotografia</em></h2>
+      <p class="ig-sub" data-reveal>Las últimas historias que hemos contado.</p>
+    </div>
+    <div class="ig-grid" data-reveal>
+      <a class="ig-item" href="https://www.instagram.com/dianasegurafotografia/" target="_blank" rel="noopener">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80" alt="Post Instagram" loading="lazy"/>
+        <div class="ig-overlay"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></div>
+      </a>
+      <a class="ig-item ig-item--tall" href="https://www.instagram.com/dianasegurafotografia/" target="_blank" rel="noopener">
+        <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=500&q=80" alt="Post Instagram" loading="lazy"/>
+        <div class="ig-overlay"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></div>
+      </a>
+      <a class="ig-item" href="https://www.instagram.com/dianasegurafotografia/" target="_blank" rel="noopener">
+        <img src="https://images.unsplash.com/photo-1602030638412-bb8dcc0bc8b0?w=500&q=80" alt="Post Instagram" loading="lazy"/>
+        <div class="ig-overlay"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></div>
+      </a>
+      <a class="ig-item" href="https://www.instagram.com/dianasegurafotografia/" target="_blank" rel="noopener">
+        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=500&q=80" alt="Post Instagram" loading="lazy"/>
+        <div class="ig-overlay"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></div>
+      </a>
+      <a class="ig-item" href="https://www.instagram.com/dianasegurafotografia/" target="_blank" rel="noopener">
+        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500&q=80" alt="Post Instagram" loading="lazy"/>
+        <div class="ig-overlay"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></div>
+      </a>
+      <a class="ig-item" href="https://www.instagram.com/dianasegurafotografia/" target="_blank" rel="noopener">
+        <img src="https://images.unsplash.com/photo-1525772764200-be829a350797?w=500&q=80" alt="Post Instagram" loading="lazy"/>
+        <div class="ig-overlay"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.sw-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></div>
+      </a>
+    </div>
+    <div class="ig-cta-wrap" data-reveal>
+      <a href="https://www.instagram.com/dianasegurafotografia/" target="_blank" rel="noopener" class="ig-cta">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        Seguir en Instagram
+      </a>
+    </div>
+  </section>
+
+  <!-- MAPA -->
+  <section class="mapasec section" id="mapa">
+    <div class="map-head">
+      <span class="eyebrow" data-reveal>Estudio</span>
+      <h2 class="sec-h2" data-reveal>Dónde<br/><em>encontrarme</em></h2>
+    </div>
+    <div class="map-wrap" data-reveal>
+      <div class="map-info">
+        <div class="mi-item">
+          <div class="mi-ico">📍</div>
+          <div>
+            <div class="mi-lbl">Dirección</div>
+            <div class="mi-val">c/Llibertat, 22 · Barcelona 08012</div>
+          </div>
+        </div>
+        <div class="mi-item">
+          <div class="mi-ico">🕐</div>
+          <div>
+            <div class="mi-lbl">Horario de atención</div>
+            <div class="mi-val">Lunes–Viernes: 10h–19h<br/>Sábados: 10h–14h</div>
+          </div>
+        </div>
+        <div class="mi-item">
+          <div class="mi-ico">🚇</div>
+          <div>
+            <div class="mi-lbl">Metro</div>
+            <div class="mi-val">Fontana (L3) · 2 min a pie</div>
+          </div>
+        </div>
+        <a href="https://maps.app.goo.gl/MbhcUXWLYpRRCt6D9" target="_blank" rel="noopener" class="mi-btn">Cómo llegar →</a>
+      </div>
+      <div class="map-embed">
+        <iframe
+          title="Estudio Diana Segura Barcelona"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2992.7127338455787!2d2.155840976500966!3d41.40477399999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a2f560000001%3A0x0!2sCalle+de+la+Llibertat%2C+22%2C+08012+Barcelona!5e0!3m2!1ses!2ses!4v1700000000000"
+          width="100%" height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+
   <section class="faq section">
     <div class="faq-head">
       <span class="eyebrow" data-reveal>FAQ</span>
