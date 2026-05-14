@@ -1,477 +1,269 @@
-/* ============================================
-   DIANA SEGURA · v4 LIGHT
-   Sin cursor personalizado · cursor del sistema
-   ============================================ */
-
-(function(){
+/* ============================================================
+   DIANA SEGURA · LUXURY EDITORIAL
+   JS — Clean, no cursor, no petals
+   ============================================================ */
+(function () {
   'use strict';
 
-  /* ========== LOADER ========== */
-  const loader = document.getElementById('loader');
-  const loaderProgress = document.getElementById('loaderProgress');
-  const loaderPct = document.getElementById('loaderPct');
-  let progress = 0;
-  const loaderInterval = setInterval(()=>{
-    progress += Math.random() * 12;
-    if (progress >= 100) {
-      progress = 100;
-      clearInterval(loaderInterval);
-      setTimeout(()=>{
-        loader.classList.add('out');
-        setTimeout(()=>loader.style.display='none', 700);
-      }, 300);
-    }
-    loaderProgress.style.width = progress + '%';
-    loaderPct.textContent = Math.floor(progress) + '%';
-  }, 80);
+  /* ── LOADER ─────────────────────────────────────── */
+  const loader   = document.getElementById('loader');
+  const lFill    = document.getElementById('loaderFill');
+  let prog = 0;
+  const iv = setInterval(() => {
+    prog += Math.random() * 14;
+    if (prog >= 100) { prog = 100; clearInterval(iv); setTimeout(hideLoader, 300); }
+    lFill.style.width = prog + '%';
+  }, 70);
+  function hideLoader() {
+    loader.classList.add('out');
+    setTimeout(() => loader.style.display = 'none', 750);
+  }
 
-  /* ========== NAV SCROLL ========== */
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', ()=>{
-    if (window.scrollY > 50) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
+  /* ── THEME ───────────────────────────────────────── */
+  const themeBtn = document.getElementById('themeBtn');
+  const body     = document.body;
+  const saved    = localStorage.getItem('ds-theme');
+  if (saved === 'dark') body.classList.add('dark');
+  themeBtn && themeBtn.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    localStorage.setItem('ds-theme', body.classList.contains('dark') ? 'dark' : 'light');
   });
 
-  /* ========== BURGER / MOBILE MENU ========== */
-  const burger = document.getElementById('burger');
-  const mobMenu = document.getElementById('mobMenu');
-  burger.addEventListener('click', ()=>{
+  /* ── NAV ─────────────────────────────────────────── */
+  const nav     = document.getElementById('nav');
+  const burger  = document.getElementById('navBurger');
+  const drawer  = document.getElementById('drawer');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  }, { passive: true });
+  burger && burger.addEventListener('click', () => {
     burger.classList.toggle('open');
-    mobMenu.classList.toggle('open');
-    document.body.style.overflow = mobMenu.classList.contains('open') ? 'hidden' : '';
+    drawer.classList.toggle('open');
+    body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
   });
-  document.querySelectorAll('.mm-link').forEach(link=>{
-    link.addEventListener('click', ()=>{
-      burger.classList.remove('open');
-      mobMenu.classList.remove('open');
-      document.body.style.overflow = '';
+  document.querySelectorAll('.dr-link, .dr-cta').forEach(l => l.addEventListener('click', () => {
+    burger.classList.remove('open');
+    drawer.classList.remove('open');
+    body.style.overflow = '';
+  }));
+
+  /* ── REVEAL ON SCROLL ────────────────────────────── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+  /* ── SMOOTH SCROLL ───────────────────────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (!t || a.getAttribute('href') === '#') return;
+      e.preventDefault();
+      window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - nav.offsetHeight + 1, behavior: 'smooth' });
     });
   });
 
-  /* ========== REVEAL ON SCROLL ========== */
-  const revealObserver = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, {threshold:0.1, rootMargin:'0px 0px -50px 0px'});
-  document.querySelectorAll('[data-reveal]').forEach(el=>revealObserver.observe(el));
-
-  /* ========== PORTFOLIO FILTERS ========== */
-  const filters = document.querySelectorAll('.pf-filter');
-  const items = document.querySelectorAll('.pf-item');
-  filters.forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      filters.forEach(b=>b.classList.remove('active'));
+  /* ── PORTFOLIO FILTERS ───────────────────────────── */
+  document.querySelectorAll('.wf-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.wf-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const f = btn.dataset.filter;
-      items.forEach(item=>{
-        if (f === 'all' || item.dataset.cat === f) item.classList.remove('hide');
-        else item.classList.add('hide');
+      const f = btn.dataset.f;
+      document.querySelectorAll('.wg-item').forEach(item => {
+        item.classList.toggle('hide', f !== 'all' && item.dataset.cat !== f);
       });
     });
   });
 
-  /* ========== LIGHTBOX ========== */
-  const lightbox = document.getElementById('lightbox');
-  const lbContent = document.getElementById('lbContent');
-  const lbCaption = document.getElementById('lbCaption');
-  const lbClose = document.getElementById('lbClose');
-  const lbPrev = document.getElementById('lbPrev');
-  const lbNext = document.getElementById('lbNext');
-  let lbIdx = 0;
-  let lbItems = [];
+  /* ── LIGHTBOX ────────────────────────────────────── */
+  const lb    = document.getElementById('lb');
+  const lbImg = document.getElementById('lbImg');
+  const lbX   = document.getElementById('lbX');
+  const lbP   = document.getElementById('lbP');
+  const lbN   = document.getElementById('lbN');
+  let lbItems = [], lbIdx = 0;
 
-  function openLightbox(idx){
-    lbItems = Array.from(document.querySelectorAll('.pf-item:not(.hide)'));
-    lbIdx = idx;
-    showLb();
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
+  function openLb(idx) {
+    lbItems = Array.from(document.querySelectorAll('.wg-item:not(.hide)'));
+    lbIdx   = idx;
+    renderLb();
+    lb.classList.add('open');
+    body.style.overflow = 'hidden';
   }
-  function showLb(){
+  function renderLb() {
     const item = lbItems[lbIdx];
     if (!item) return;
     const img = item.querySelector('img');
-    const cat = item.dataset.cat || '';
-    if (img) {
-      lbContent.innerHTML = `<img src="${img.src.replace('w=600','w=1400').replace('w=900','w=1600')}" alt="${img.alt}"/>`;
-    } else {
-      // placeholder
-      lbContent.innerHTML = `<div style="color:rgba(255,255,255,0.5);text-align:center;padding:3rem"><div style="font-size:4rem;margin-bottom:1rem">📷</div><p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic">Aquí irá una foto real de Diana</p></div>`;
-    }
-    lbCaption.textContent = `${cat} · ${lbIdx+1} / ${lbItems.length}`;
+    lbImg.innerHTML = img
+      ? `<img src="${img.src.replace(/w=\d+/, 'w=1600')}" alt="${img.alt}"/>`
+      : `<div style="color:rgba(255,255,255,.4);text-align:center;padding:3rem;font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic">Tu foto aquí</div>`;
   }
-  function closeLb(){
-    lightbox.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  function lbNav(dir){
-    lbIdx = (lbIdx + dir + lbItems.length) % lbItems.length;
-    showLb();
-  }
-  document.querySelectorAll('.pf-item').forEach((item, i)=>{
-    item.addEventListener('click', ()=>openLightbox(i));
-  });
-  lbClose.addEventListener('click', closeLb);
-  lbPrev.addEventListener('click', (e)=>{e.stopPropagation();lbNav(-1)});
-  lbNext.addEventListener('click', (e)=>{e.stopPropagation();lbNav(1)});
-  lightbox.addEventListener('click', (e)=>{
-    if (e.target === lightbox) closeLb();
-  });
-  document.addEventListener('keydown', (e)=>{
-    if (!lightbox.classList.contains('open')) return;
+  function closeLb() { lb.classList.remove('open'); body.style.overflow = ''; }
+  function navLb(d) { lbIdx = (lbIdx + d + lbItems.length) % lbItems.length; renderLb(); }
+
+  document.querySelectorAll('.wg-item').forEach((item, i) => item.addEventListener('click', () => openLb(i)));
+  lbX && lbX.addEventListener('click', closeLb);
+  lbP && lbP.addEventListener('click', e => { e.stopPropagation(); navLb(-1); });
+  lbN && lbN.addEventListener('click', e => { e.stopPropagation(); navLb(1); });
+  lb && lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', e => {
+    if (!lb?.classList.contains('open')) return;
     if (e.key === 'Escape') closeLb();
-    if (e.key === 'ArrowLeft') lbNav(-1);
-    if (e.key === 'ArrowRight') lbNav(1);
+    if (e.key === 'ArrowLeft') navLb(-1);
+    if (e.key === 'ArrowRight') navLb(1);
   });
 
-  /* ========== FAQ ACCORDION ========== */
-  document.querySelectorAll('.faq-q').forEach(q=>{
-    q.addEventListener('click', ()=>{
+  /* ── FAQ ─────────────────────────────────────────── */
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
       const item = q.parentElement;
       const wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
       if (!wasOpen) item.classList.add('open');
     });
   });
 
-  /* ========== CONTACT FORM ========== */
-  const ctForm = document.getElementById('ctForm');
-  if (ctForm) {
-    ctForm.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const btn = document.getElementById('cfSubmit');
-      const btnTxt = document.getElementById('cfBtnTxt');
-      const success = document.getElementById('cfSuccess');
-      btn.disabled = true;
-      btnTxt.textContent = 'Enviando...';
-      // Simulación: aquí podrías integrar Formspree, EmailJS, etc.
-      setTimeout(()=>{
-        success.classList.add('show');
-        ctForm.reset();
-        btnTxt.textContent = 'Enviar mensaje';
-        btn.disabled = false;
-        setTimeout(()=>success.classList.remove('show'), 5000);
-      }, 1200);
-    });
+  /* ── BEFORE / AFTER ──────────────────────────────── */
+  function initBA(handleId, beforeId) {
+    const h = document.getElementById(handleId);
+    const b = document.getElementById(beforeId);
+    if (!h || !b) return;
+    const wrap = b.closest('.ba-wrap');
+    let drag = false;
+    function set(cx) {
+      const r   = wrap.getBoundingClientRect();
+      let  pct  = Math.max(2, Math.min(98, (cx - r.left) / r.width * 100));
+      h.style.left           = pct + '%';
+      b.style.clipPath       = `inset(0 ${100 - pct}% 0 0)`;
+    }
+    h.addEventListener('mousedown',  e => { drag = true; e.preventDefault(); });
+    window.addEventListener('mouseup',   () => drag = false);
+    window.addEventListener('mousemove', e => drag && set(e.clientX));
+    h.addEventListener('touchstart', e => { drag = true; e.preventDefault(); }, { passive: false });
+    window.addEventListener('touchend',  () => drag = false);
+    window.addEventListener('touchmove', e => drag && set(e.touches[0].clientX), { passive: true });
+    wrap.addEventListener('click', e => set(e.clientX));
   }
+  initBA('baH1', 'baB1');
+  initBA('baH2', 'baB2');
 
-  /* ========== CALCULADORA ========== */
-  const calcOpts = document.querySelectorAll('.calc-opt');
-  const calcChecks = document.querySelectorAll('.calc-check input');
-  const calcTotal = document.getElementById('calcTotal');
+  /* ── CALCULATOR ──────────────────────────────────── */
+  const calcNum    = document.getElementById('calcNum');
   const calcDetail = document.getElementById('calcDetail');
+  const tipoLabels = { familia:'Familia', boda:'Boda', evento:'Evento', pareja:'Pareja' };
+  const durLabels  = { '1h':'1 hora', '2h':'2 horas', '4h':'4 horas', 'full':'Día completo' };
+  const locLabels  = { bcn:'Barcelona', cat:'Cataluña', esp:'España', int:'Internacional' };
 
-  // Group selection (single-choice per group)
-  document.querySelectorAll('.calc-options').forEach(group=>{
-    group.querySelectorAll('.calc-opt').forEach(opt=>{
-      opt.addEventListener('click', ()=>{
-        group.querySelectorAll('.calc-opt').forEach(o=>o.classList.remove('active'));
-        opt.classList.add('active');
+  document.querySelectorAll('.co-row').forEach(row => {
+    row.querySelectorAll('.co-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        row.querySelectorAll('.co-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
         updateCalc();
       });
     });
   });
-  calcChecks.forEach(c=>c.addEventListener('change', updateCalc));
+  document.querySelectorAll('.co-extra input').forEach(c => c.addEventListener('change', updateCalc));
 
-  function updateCalc(){
-    const tipoEl = document.querySelector('[data-group="tipo"] .calc-opt.active');
-    const horasEl = document.querySelector('[data-group="horas"] .calc-opt.active');
-    const locEl = document.querySelector('[data-group="loc"] .calc-opt.active');
-    if (!tipoEl || !horasEl || !locEl) return;
-
-    const tipoLabels = {familia:'Familia',boda:'Boda',evento:'Evento',amor:'Sesión de pareja'};
-    const horasLabels = {'1':'1 hora','2':'2 horas','4':'4 horas','8':'día completo'};
-    const locLabels = {bcn:'Barcelona',cat:'Cataluña',esp:'España',int:'Internacional'};
-
-    let total = parseInt(tipoEl.dataset.price);
-    // Boda is full day already
-    if (tipoEl.dataset.value !== 'boda') {
-      total += parseInt(horasEl.dataset.price);
-    }
-    total += parseInt(locEl.dataset.price);
-    calcChecks.forEach(c=>{
-      if (c.checked) total += parseInt(c.dataset.price);
-    });
-
-    // animate
-    calcTotal.classList.remove('bump');
-    void calcTotal.offsetWidth;
-    calcTotal.classList.add('bump');
-    calcTotal.textContent = total.toLocaleString('es-ES');
-
-    let detail = `${tipoLabels[tipoEl.dataset.value]}`;
-    if (tipoEl.dataset.value !== 'boda') detail += ` · ${horasLabels[horasEl.dataset.value]}`;
-    detail += ` · ${locLabels[locEl.dataset.value]}`;
+  function updateCalc() {
+    const tipo = document.querySelector('[data-group="tipo"] .co-btn.active');
+    const dur  = document.querySelector('[data-group="dur"]  .co-btn.active');
+    const loc  = document.querySelector('[data-group="loc"]  .co-btn.active');
+    if (!tipo || !dur || !loc) return;
+    let total = parseInt(tipo.dataset.p);
+    if (tipo.dataset.v !== 'boda') total += parseInt(dur.dataset.p);
+    total += parseInt(loc.dataset.p);
+    document.querySelectorAll('.co-extra input:checked').forEach(c => total += parseInt(c.dataset.p));
+    calcNum.classList.remove('bump');
+    void calcNum.offsetWidth;
+    calcNum.classList.add('bump');
+    calcNum.textContent = total.toLocaleString('es-ES');
+    let detail = tipoLabels[tipo.dataset.v];
+    if (tipo.dataset.v !== 'boda') detail += ' · ' + durLabels[dur.dataset.v];
+    detail += ' · ' + locLabels[loc.dataset.v];
     calcDetail.textContent = detail;
   }
   updateCalc();
 
-  /* ========== CALENDARIO DISPONIBILIDAD ========== */
-  const calGrid = document.getElementById('calGrid');
-  const calMonth = document.getElementById('calMonth');
-  const calPrev = document.getElementById('calPrev');
-  const calNext = document.getElementById('calNext');
+  /* ── CALENDAR ────────────────────────────────────── */
+  const calGrid     = document.getElementById('calGrid');
+  const calMonthEl  = document.getElementById('calMonth');
+  const calPrev     = document.getElementById('calPrev');
+  const calNext     = document.getElementById('calNext');
   const calSelected = document.getElementById('calSelected');
-  const ctFecha = document.getElementById('ctFecha');
+  const ctFecha     = document.getElementById('ctFecha');
+  const months      = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const today       = new Date(); today.setHours(0,0,0,0);
+  let view          = new Date(today.getFullYear(), today.getMonth(), 1);
 
-  const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  let viewDate = new Date(today.getFullYear(), today.getMonth(), 1);
-
-  // Disponibilidad simulada (en producción se cargaría de un backend o Google Calendar)
-  // Patrón: dado un día, devuelve 'free', 'some', 'busy'
-  function getAvailability(date){
-    if (date < today) return 'past';
-    const day = date.getDay();
-    const dom = date.getDate();
-    // Domingos suelen estar libres
-    if (day === 0) return 'free';
-    // Sábados: muchos están ocupados (bodas)
-    if (day === 6) {
-      if (dom % 3 === 0) return 'free';
-      if (dom % 5 === 0) return 'some';
-      return 'busy';
-    }
-    // Resto: variabilidad
-    if (dom % 7 === 0) return 'busy';
-    if (dom % 4 === 0) return 'some';
-    return 'free';
+  function avail(d) {
+    if (d < today) return 'past';
+    const dow = d.getDay(), dom = d.getDate();
+    if (dow === 0) return 'free';
+    if (dow === 6) return dom % 3 === 0 ? 'free' : dom % 5 === 0 ? 'some' : 'busy';
+    return dom % 7 === 0 ? 'busy' : dom % 4 === 0 ? 'some' : 'free';
   }
-
-  function renderCalendar(){
-    const y = viewDate.getFullYear();
-    const m = viewDate.getMonth();
-    calMonth.textContent = `${monthNames[m]} ${y}`;
-    const firstDay = new Date(y, m, 1);
-    let startDow = firstDay.getDay() - 1; // 0=Lunes
-    if (startDow < 0) startDow = 6;
-    const daysInMonth = new Date(y, m+1, 0).getDate();
-
+  function renderCal() {
+    const y = view.getFullYear(), m = view.getMonth();
+    calMonthEl.textContent = `${months[m]} ${y}`;
+    let start = new Date(y, m, 1).getDay() - 1;
+    if (start < 0) start = 6;
+    const days = new Date(y, m + 1, 0).getDate();
     let html = '';
-    for (let i = 0; i < startDow; i++) html += `<div class="cal-day empty"></div>`;
-    for (let d = 1; d <= daysInMonth; d++){
-      const dt = new Date(y, m, d);
-      const isToday = dt.getTime() === today.getTime();
-      const status = getAvailability(dt);
-      let cls = 'cal-day';
-      if (status === 'past') cls += ' past';
-      else cls += ' ' + status;
-      if (isToday) cls += ' today';
-      html += `<div class="${cls}" data-date="${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}" data-day="${d}" data-month="${m}" data-year="${y}" data-status="${status}">${d}</div>`;
+    for (let i = 0; i < start; i++) html += `<div class="cal-day empty"></div>`;
+    for (let d = 1; d <= days; d++) {
+      const dt  = new Date(y, m, d);
+      const st  = avail(dt);
+      const cls = ['cal-day', st, dt.getTime() === today.getTime() ? 'today' : ''].join(' ');
+      html += `<div class="${cls}" data-date="${y}-${m+1}-${d}">${d}</div>`;
     }
     calGrid.innerHTML = html;
-
-    calGrid.querySelectorAll('.cal-day').forEach(el=>{
-      el.addEventListener('click', ()=>{
-        const status = el.dataset.status;
-        if (status === 'past' || status === 'busy' || el.classList.contains('empty')) return;
-        calGrid.querySelectorAll('.cal-day').forEach(d=>d.classList.remove('selected'));
+    calGrid.querySelectorAll('.cal-day:not(.empty):not(.past):not(.busy)').forEach(el => {
+      el.addEventListener('click', () => {
+        calGrid.querySelectorAll('.cal-day.selected').forEach(x => x.classList.remove('selected'));
         el.classList.add('selected');
-        const d = el.dataset.day;
-        const m = parseInt(el.dataset.month);
-        const y = el.dataset.year;
-        const statusTxt = status === 'free' ? '✓ Día libre' : '⚡ Pocas horas disponibles';
-        calSelected.innerHTML = `<strong>${d} de ${monthNames[m]} de ${y}</strong> · ${statusTxt}`;
-        // autofill formulario
-        if (ctFecha) ctFecha.value = `${d}/${m+1}/${y}`;
+        const [, y, m, d] = el.dataset.date.split('-');
+        const st = avail(new Date(+y, +m - 1, +d));
+        calSelected.innerHTML = `<strong>${d} de ${months[+m - 1]} de ${y}</strong> · ${st === 'free' ? '✓ Día libre' : '⚡ Pocas horas disponibles'}`;
+        if (ctFecha) ctFecha.value = `${d}/${m}/${y}`;
       });
     });
   }
-  renderCalendar();
-
-  calPrev.addEventListener('click', ()=>{
-    viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1);
-    // No retroceder más allá del mes actual
-    const monthFloor = new Date(today.getFullYear(), today.getMonth(), 1);
-    if (viewDate < monthFloor) viewDate = monthFloor;
-    renderCalendar();
+  renderCal();
+  calPrev && calPrev.addEventListener('click', () => {
+    const floor = new Date(today.getFullYear(), today.getMonth(), 1);
+    const prev  = new Date(view.getFullYear(), view.getMonth() - 1, 1);
+    if (prev >= floor) { view = prev; renderCal(); }
   });
-  calNext.addEventListener('click', ()=>{
-    viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
-    renderCalendar();
+  calNext && calNext.addEventListener('click', () => {
+    view = new Date(view.getFullYear(), view.getMonth() + 1, 1); renderCal();
   });
 
-  /* ========== HERO STATS COUNT ANIMATION ========== */
-  const counters = document.querySelectorAll('[data-count]');
-  const counterObs = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const target = parseFloat(el.dataset.count);
-        const isDec = el.hasAttribute('data-dec');
-        const dur = 1500;
-        const start = performance.now();
-        function tick(now){
-          const p = Math.min((now - start) / dur, 1);
-          const ease = 1 - Math.pow(1-p, 3);
-          const val = target * ease;
-          el.textContent = isDec ? val.toFixed(1).replace('.', ',') : Math.floor(val);
-          if (p < 1) requestAnimationFrame(tick);
-          else el.textContent = isDec ? target.toString().replace('.', ',') : target;
-        }
-        requestAnimationFrame(tick);
-        counterObs.unobserve(el);
-      }
+  /* ── CONTACT FORM ────────────────────────────────── */
+  const ctForm = document.getElementById('ctForm');
+  const cfOk   = document.getElementById('cfOk');
+  const cfBtn  = document.getElementById('cfSubmit');
+  const cfTxt  = document.getElementById('cfTxt');
+  ctForm && ctForm.addEventListener('submit', e => {
+    e.preventDefault();
+    cfBtn.disabled = true; cfTxt.textContent = 'Enviando...';
+    setTimeout(() => {
+      cfOk.classList.add('show'); ctForm.reset();
+      cfTxt.textContent = 'Enviar mensaje'; cfBtn.disabled = false;
+      setTimeout(() => cfOk.classList.remove('show'), 5000);
+    }, 1200);
+  });
+
+  /* ── PARALLAX (subtle) ───────────────────────────── */
+  const parallaxItems = document.querySelectorAll('.hv-frame');
+  window.addEventListener('scroll', () => {
+    const sy = window.pageYOffset;
+    parallaxItems.forEach((el, i) => {
+      const d = i === 0 ? 0.04 : 0.07;
+      el.style.transform = `translateY(${sy * d}px)`;
     });
-  });
-  counters.forEach(c=>counterObs.observe(c));
+  }, { passive: true });
 
-  /* ========== SMOOTH SCROLL FOR ANCHORS ========== */
-  document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click', (e)=>{
-      const target = document.querySelector(a.getAttribute('href'));
-      if (!target || a.getAttribute('href') === '#') return;
-      e.preventDefault();
-      const navH = nav.offsetHeight;
-      const top = target.getBoundingClientRect().top + window.pageYOffset - navH + 1;
-      window.scrollTo({top, behavior:'smooth'});
-    });
-  });
-
-})();
-
-/* ============================================
-   V5 NUEVAS FEATURES
-   ============================================ */
-
-/* ========== DARK MODE TOGGLE ========== */
-const themeToggle = document.getElementById('themeToggle');
-const body = document.body;
-const savedTheme = localStorage.getItem('ds-theme') || 'light-mode';
-body.classList.remove('light-mode','dark-mode');
-body.classList.add(savedTheme);
-if(themeToggle){
-  themeToggle.addEventListener('click', ()=>{
-    const isDark = body.classList.contains('dark-mode');
-    body.classList.toggle('dark-mode', !isDark);
-    body.classList.toggle('light-mode', isDark);
-    localStorage.setItem('ds-theme', isDark ? 'light-mode' : 'dark-mode');
-  });
-}
-
-/* ========== PÉTALOS ANIMADOS ========== */
-(function(){
-  const canvas = document.getElementById('petalsCanvas');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H;
-  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-  resize();
-  window.addEventListener('resize', resize);
-
-  const PETAL_COUNT = 22;
-  const petals = [];
-  // Colores rosas suaves
-  const colors = ['rgba(216,112,147,0.55)','rgba(244,194,213,0.5)','rgba(252,230,240,0.6)','rgba(200,84,120,0.4)','rgba(255,182,207,0.5)'];
-
-  function createPetal(fromTop=false){
-    return {
-      x: Math.random()*W,
-      y: fromTop ? -20 : Math.random()*H,
-      r: Math.random()*10 + 5,
-      rot: Math.random()*Math.PI*2,
-      rotSpeed: (Math.random()-0.5)*0.06,
-      vx: (Math.random()-0.5)*0.8,
-      vy: Math.random()*1.2 + 0.4,
-      color: colors[Math.floor(Math.random()*colors.length)],
-      wobble: Math.random()*Math.PI*2,
-      wobbleSpeed: Math.random()*0.04 + 0.01,
-    };
-  }
-  for(let i=0;i<PETAL_COUNT;i++) petals.push(createPetal(false));
-
-  function drawPetal(p){
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.rot);
-    ctx.fillStyle = p.color;
-    ctx.beginPath();
-    ctx.ellipse(0, 0, p.r, p.r*0.55, 0, 0, Math.PI*2);
-    ctx.fill();
-    ctx.restore();
-  }
-
-  let paused = false;
-  document.addEventListener('visibilitychange', ()=>{ paused = document.hidden; });
-
-  function animate(){
-    requestAnimationFrame(animate);
-    if(paused) return;
-    ctx.clearRect(0,0,W,H);
-    petals.forEach(p=>{
-      p.wobble += p.wobbleSpeed;
-      p.x += p.vx + Math.sin(p.wobble)*0.5;
-      p.y += p.vy;
-      p.rot += p.rotSpeed;
-      if(p.y > H + 20) Object.assign(p, createPetal(true));
-      drawPetal(p);
-    });
-  }
-  animate();
-})();
-
-/* ========== HERO VIDEO BACKGROUND ========== */
-const heroBgVideo = document.getElementById('heroBgVideo');
-if(heroBgVideo){
-  heroBgVideo.addEventListener('error', ()=>{
-    // Si el vídeo no carga, fallback limpio
-    heroBgVideo.style.display = 'none';
-  });
-}
-
-/* ========== PARALLAX PORTFOLIO ========== */
-(function(){
-  const items = document.querySelectorAll('.pf-item');
-  function onScroll(){
-    const scrollY = window.pageYOffset;
-    items.forEach((item, i)=>{
-      const rect = item.getBoundingClientRect();
-      const centerOffset = (rect.top + rect.height/2) - window.innerHeight/2;
-      const depth = (i%3 === 0) ? 0.06 : (i%3 === 1) ? 0.03 : 0.09;
-      const img = item.querySelector('img');
-      if(img){
-        const ty = centerOffset * depth;
-        img.style.transform = `scale(1.12) translateY(${ty}px)`;
-      }
-    });
-  }
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
-})();
-
-/* ========== BEFORE / AFTER SLIDER ========== */
-(function(){
-  function initBA(handleId, beforeId){
-    const handle = document.getElementById(handleId);
-    const before = document.getElementById(beforeId);
-    if(!handle || !before) return;
-    const wrap = before.closest('.ba-slider-wrap');
-    let dragging = false;
-
-    function setPos(clientX){
-      const rect = wrap.getBoundingClientRect();
-      let pct = (clientX - rect.left) / rect.width * 100;
-      pct = Math.max(2, Math.min(98, pct));
-      handle.style.left = pct + '%';
-      before.style.clipPath = `inset(0 ${100-pct}% 0 0)`;
-    }
-
-    handle.addEventListener('mousedown', e=>{ dragging=true; e.preventDefault(); });
-    window.addEventListener('mouseup', ()=>dragging=false);
-    window.addEventListener('mousemove', e=>{ if(dragging) setPos(e.clientX); });
-
-    handle.addEventListener('touchstart', e=>{ dragging=true; e.preventDefault(); },{passive:false});
-    window.addEventListener('touchend', ()=>dragging=false);
-    window.addEventListener('touchmove', e=>{ if(dragging) setPos(e.touches[0].clientX); },{passive:true});
-
-    // Also allow clicking anywhere on wrap
-    wrap.addEventListener('click', e=>setPos(e.clientX));
-  }
-  initBA('baHandle1','baBefore1');
-  initBA('baHandle2','baBefore2');
 })();
